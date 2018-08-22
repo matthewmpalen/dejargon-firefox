@@ -58,7 +58,7 @@ function dejargon(root, definition) {
   getDefinitions()
     .then(function(data) {
       for (let i = 0; i < data.length; i++) {
-	dejargon(document.body, data[i]);
+        dejargon(document.body, data[i]);
       }
       
       console.log("Finishing loading dejargon");
