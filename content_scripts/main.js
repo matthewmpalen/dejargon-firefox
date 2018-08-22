@@ -1,14 +1,8 @@
 async function getDefinitions() {
-    const getting = await browser.storage.local.get("definitionsUrl");
+    const getting = await browser.storage.local.get("dejargonDefinitions");
     const result = await getting;
-    const defsUrl = await result.definitionsUrl;
-    const response = await fetch(defsUrl, {
-        'method': 'GET',
-        'mode': 'cors'
-    })
-    return await response.json();
+    return await result.dejargonDefinitions;
 }
-
 
 function dejargon(root, definition) {
     let word = definition.name;
@@ -61,8 +55,9 @@ function dejargon(root, definition) {
                 dejargon(document.body, data[i]);
             }
 
-            console.log("Finishing loading dejargon");
+            console.log("dejargon: Finished loading " + data.length);
         })
         .catch(e => console.error(e))
+
 })();
 

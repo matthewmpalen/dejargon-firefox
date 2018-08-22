@@ -1,9 +1,18 @@
 function saveOptions(e) {
     e.preventDefault();
-    browser.storage.local.set({
-        definitionsUrl: document.querySelector("#definitionsUrl").value
-    });
+    const defsUrl = document.querySelector("#definitionsUrl").value;
+
+    fetch(defsUrl, {
+        'method': 'GET',
+        'mode': 'cors'
+    }).then(function (response) {
+        browser.storage.local.set({
+            definitionsUrl: defsUrl,
+            dejargonDefinitions: response.json()
+        })
+    }).catch(e => console.error(e))
 }
+
 
 function restoreOptions() {
 
