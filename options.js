@@ -6,10 +6,12 @@ function saveOptions(e) {
         'method': 'GET',
         'mode': 'cors'
     }).then(function (response) {
-        browser.storage.local.set({
-            definitionsUrl: defsUrl,
-            dejargonDefinitions: response.json()
-        })
+        response.json().then(function(defs) {
+            browser.storage.local.set({
+                definitionsUrl: defsUrl,
+                dejargonDefinitions: defs,
+            });
+        });
     }).catch(e => console.error(e))
 }
 
